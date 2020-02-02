@@ -35,8 +35,8 @@ public class MainActivity  extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view);
         misdatos = new ArrayList<>();
-        misdatos.add(new Cliente("1", "Juanito", "Perez"));
-        misdatos.add(new Cliente("2", "Pablito", "Canto"));
+       // misdatos.add(new Cliente("1", "Juanito", "Perez"));
+       // misdatos.add(new Cliente("2", "Pablito", "Canto"));
         //adaptador = new MiNuevoAdaptador(this, misdatos);
         adaptador = new MiNuevoAdaptador(this,ListaClientes(conseguirstring()));
         recyclerView.setAdapter(adaptador);
@@ -50,7 +50,8 @@ public class MainActivity  extends AppCompatActivity {
             JSONArray json_array = new JSONArray(string);
             for (int i = 0; i < json_array.length(); i++) {
                 JSONObject objeto = json_array.getJSONObject(i);
-                Clientes.add(new Cliente(objeto.getString("Cod_persona"), objeto.getString("Nombre"),objeto.getString("Apellidos")));
+                Clientes.add(new Cliente(objeto.getString("Cod_persona"), objeto.getString("Nombre"),objeto.getString("Apellidos"),
+                        objeto.getString("Sexo"),objeto.getString("celular"),objeto.getString("Domicilio")));
             }
         } catch (JSONException e) {
             Log.i("mierror",e.toString());
