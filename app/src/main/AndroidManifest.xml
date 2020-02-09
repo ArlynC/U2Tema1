@@ -11,9 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InsertarCliente"></activity>
+        <activity android:name=".ActualizarCliente"></activity>
+        <activity android:name=".InsertarCliente" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Datos"/>
+        <activity android:name=".Datos" />
         <activity android:name=".MiLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

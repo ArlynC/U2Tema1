@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Datos extends AppCompatActivity {
-    TextView txtmensaje,txtsexo,txtcelular,txtdomicilio;
-    String titulo,sexo,celular,domicilio;
+    TextView txtcod,txtmensaje,txtape,txtsexo,txtcelular,txtdomicilio;
+    String cod,titulo,ape,sexo,celular,domicilio;
 
 
     @Override
@@ -18,17 +18,23 @@ public class Datos extends AppCompatActivity {
         setContentView(R.layout.datoscliente);
 
         Bundle extras = getIntent().getExtras();
-        titulo = extras.getString("Nombre");
+        cod=extras.getString("codigo");
+        titulo = extras.getString("nombre");
+        ape = extras.getString("ape");
         sexo=extras.getString("sexo");
         celular=extras.getString("celular");
         domicilio=extras.getString("Domicilio");
 
+        txtcod=findViewById(R.id.codigo);
         txtmensaje=findViewById(R.id.titulo);
+        txtape=findViewById(R.id.ape);
         txtsexo=findViewById(R.id.sexo);
         txtcelular=findViewById(R.id.celular);
         txtdomicilio=findViewById(R.id.domicilio);
 
+        txtcod.setText(cod);
         txtmensaje.setText(titulo);
+        txtape.setText(ape);
         txtsexo.setText(sexo);
         txtcelular.setText(celular);
         txtdomicilio.setText(domicilio);

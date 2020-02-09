@@ -39,7 +39,9 @@ public class MiNuevoAdaptador extends RecyclerView.Adapter<MiNuevoAdaptador.View
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(micontext.getApplicationContext(), Datos.class);
-               intent.putExtra("Nombre", holder.titulo.getText());
+                intent.putExtra("codigo",lista.get(i).getcodigo());
+                intent.putExtra("nombre",lista.get(i).getNombre());
+                intent.putExtra("ape",lista.get(i).getApellido());
                intent.putExtra("sexo",lista.get(i).getSexo());
                intent.putExtra("celular",lista.get(i).getCelular());
                intent.putExtra("Domicilio",lista.get(i).getDomicilio());
