@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,11 +16,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
+
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity  extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -42,6 +49,8 @@ public class MainActivity  extends AppCompatActivity {
         recyclerView.setAdapter(adaptador);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
+        new Peticion().execute();
     }
     //Leyendo JSON
     private ArrayList<Cliente> ListaClientes(String string) {
@@ -99,4 +108,32 @@ public class MainActivity  extends AppCompatActivity {
         adaptador.update(ListaClientes(conseguirstring()));
     }
 
+
+    public static class Peticion extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+//Url del servicio,sin el endpoint
+            final String url = "https://fugacious-bits.000webhostapp.com/";
+//Creamos el objeto Retrofit
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(url)//Indicamos la url del servicio
+                    .addConverterFactory(GsonConverterFactory.create())//Agregue la fábrica del convertidor para la serialización
+// y la deserialización de objetos.
+                    .build();//Cree la instancia de Retrofit utilizando los valores configurados.
+//https://square.github.io/retrofit/2.x/retrofit/retrofit2/Retrofit.Builder.html
+            servicesRetrofit service = retrofit.create(servicesRetrofit.class);
+//Recuerda que debemos colocar el modo en como obtenemos esa respuesta,en este caso es una lista de objetos
+//pero puede ser simplemente un objeto.
+            Call<List<Cliente>> response = service.getUsersGet();//indicamos el metodo que deseamos ejecutar
+            try {
+//Realizamos la peticion sincrona
+//Recuerda que en el body se encuentra la respuesta,que en este caso es una lista de objetos
+                for (Cliente user : response.execute().body())//realizamos un foreach para recorrer la lista
+                    Log.e("Respuesta: ",user.getNombre()+ " "+user.getApellido()+" "+user.getSexo()+" "+user.getCelular());//mostamos en pantalla algunos de los datos del usuario
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 }

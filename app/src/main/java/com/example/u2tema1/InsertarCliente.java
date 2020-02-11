@@ -2,6 +2,8 @@ package com.example.u2tema1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -112,4 +114,6 @@ public class InsertarCliente extends AppCompatActivity {
             if (conexion!=null) conexion.disconnect();
         }*/
     }
+
+
 }

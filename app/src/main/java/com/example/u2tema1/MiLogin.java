@@ -67,7 +67,6 @@ public class MiLogin  extends AppCompatActivity {
     public void onLogin(View view) {
         MiTarea tarea = new MiTarea();
         tarea.execute();
-
     }
 
     class MiTarea extends AsyncTask<Void, Void, Void> {
